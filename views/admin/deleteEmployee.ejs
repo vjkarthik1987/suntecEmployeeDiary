@@ -1,0 +1,107 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form id="searchForm" class="mb-3">
+        <label for="searchInput" class="form-label">Search Employee</label>
+        <input type="text" id="searchInput" class="form-control" placeholder="Type to search...">
+    </form>
+
+    <div id="searchResults" class="mb-3"></div>
+
+    <div id="employeeDetails" class="d-none">
+        <h3 id="employeeName"></h3>
+        <p id="employeeEmail"></p>
+        <p id="employeeTeam"></p>
+        <p id="employeeManagerEmail"></p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="confirmDelete">
+            <label class="form-check-label" for="confirmDelete">
+                Confirm Delete
+            </label>
+        </div>
+        <button id="deleteEmployeeBtn" class="btn btn-danger">Delete Employee</button>
+    </div>
+</div>
+
+<script>
+    // Function to fetch employee data based on search input
+    function searchEmployees(query) {
+        fetch(`/admin/search?q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = '';
+
+                if (data.length === 0) {
+                    resultsDiv.innerHTML = '<p>No employees found</p>';
+                } else {
+                    data.forEach(employee => {
+                        const employeeElement = document.createElement('div');
+                        employeeElement.innerHTML = `<p><a href="#" class="employeeLink" data-id="${employee._id}">${employee.name}</a></p>`;
+                        resultsDiv.appendChild(employeeElement);
+                    });
+                }
+            })
+            .catch(error => console.error('Error searching employees:', error));
+    }
+
+    // Event listener for search input
+    document.getElementById('searchInput').addEventListener('input', event => {
+        const searchTerm = event.target.value.trim();
+        if (searchTerm.length >= 3) {
+            searchEmployees(searchTerm);
+        }
+    });
+
+    // Event delegation for employee links
+    document.getElementById('searchResults').addEventListener('click', event => {
+        if (event.target.classList.contains('employeeLink')) {
+            event.preventDefault();
+            const employeeId = event.target.dataset.id;
+            fetchEmployeeDetails(employeeId);
+        }
+    });
+
+    // Function to fetch employee details by ID
+    function fetchEmployeeDetails(employeeId) {
+        fetch(`/admin/${employeeId}`)
+            .then(response => response.json())
+            .then(employee => {
+                document.getElementById('employeeName').textContent = employee.name;
+                document.getElementById('employeeEmail').textContent = `Email: ${employee.email}`;
+                document.getElementById('employeeTeam').textContent = `Team: ${employee.team}`;
+                document.getElementById('employeeManagerEmail').textContent = `Manager Email: ${employee.managerEmail}`;
+                document.getElementById('employeeDetails').classList.remove('d-none');
+            })
+            .catch(error => console.error('Error fetching employee details:', error));
+    }
+
+    // Event listener for delete button
+    document.getElementById('deleteEmployeeBtn').addEventListener('click', () => {
+        const employeeId = document.querySelector('.employeeLink').dataset.id;
+        const confirmDelete = document.getElementById('confirmDelete').checked;
+
+        if (confirmDelete) {
+            deleteEmployee(employeeId);
+        } else {
+            alert('Please confirm the deletion by checking the checkbox');
+        }
+    });
+
+    // Function to delete employee by ID
+    function deleteEmployee(employeeId) {
+        fetch(`/admin/${employeeId}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Optionally, redirect to another page or update UI
+                } else {
+                    alert('Failed to delete employee');
+                }
+            })
+            .catch(error => console.error('Error deleting employee:', error));
+    }
+</script>
+

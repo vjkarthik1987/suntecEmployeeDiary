@@ -1,0 +1,31 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form action="/manager/employee/<%= employee._id %>/outcome/<%= outcome._id %>?_method=patch" method="post" class="d-flex flex-column col col-12 col-md-6 mx-auto px-2">
+        <h1 class="fs-2">Give feedback</h1>
+        <h2 class="fs-4">Employee Inputs</h2>
+        <div>
+            <p class="mb-0"><b>Outcome</b></p>
+            <p class="mb-2"><%= outcome.outcome %></p>
+            <p class="mb-0"><b>Effort (in hours)</b></p>
+            <p class="mb-2"><%= outcome.effort %></p>
+            <p class="mb-0"><b>Self Rating</b></p>
+            <p class="mb-2"> <%= outcome.selfRating %></p>
+        </div>
+        <hr>
+        <h2 class="fs-4">Manager Inputs</h2>
+        <div>
+            <div class="form-group mb-3">
+                <label for="managerFeedback" class="form-label">Manager Feedback</label>
+                <textarea name="managerFeedback" id="managerFeedback" cols="20" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="managerRating" class="form-label">Manager Rating</label>
+                <input type="number" name="managerRating" id="managerRating" min="1" max="5" class="form-control mb-2" placeholder="Enter rating between 1 to 5">
+                <section>
+                    <p class="text-info">5 - Outcome of very high quality achieved with minimal/zero supervision; 4 - Outcome of very high quality completed the tasks with supervision as required; 3 - Output is of good quality, but there is some scope for improvement; 2 - Outcome was not expected as desired; and 1 - No work/minimal work done, and no outcome was achieved.</p>
+                </section>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Give Feedback</button>
+    </form>
+</div>

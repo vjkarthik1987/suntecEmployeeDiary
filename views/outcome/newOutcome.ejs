@@ -1,0 +1,58 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form action="/outcome" method="post" class="d-flex flex-column col col-12 col-md-5 mx-auto contentHolder px-2 mt-2">
+        <h1 class="fs-4 mt-2">Add New Outcome</h1>
+        <div class="form-group mb-3">
+            <label for="outcomeHeading" class="form-label">The outcome</label>
+            <input required type="text" class="form-control" placeholder="Give a brief one line about the achievement" id="outcomeHeading" name="outcomeHeading">
+        </div>
+        <div class="form-group mb-3">
+            <label for="outcome" class="form-label">Outcome details</label>
+            <textarea required name="outcome" id="outcome" cols="30" rows="5" class="form-control" placeholder="Give a detail about the outcome that was achieved. Write as much as you want :)" minlength="100"></textarea>
+            <small class="text-muted">Minimum 100 characters</small>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3 col col-12 col-md-6">
+                <label for="planEndDate" class="form-label">Planned End Date</label>
+                <input required type="date" name="planEndDate" id="planEndDate" class="form-control">
+            </div>
+            <div class="form-group mb-3 col col-12 col-md-6">
+                <label for="actualEndDate" class="form-label">Actual End Date</label>
+                <input required type="date" name="actualEndDate" id="actualEndDate" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3 col col-12 col-md-6">
+                <label for="effort" class="form-label">Effort</label>
+                <input required type="number" name="effort" id="effort" class="form-control" placeholder="Enter in hours"> 
+            </div>
+            <div class="form-group mb-3 col col-12 col-md-6"> 
+                <label for="selfRating" class="form-label">Self Rating</label>
+                <input required type="number" name="selfRating" id="selfRating" class="form-control" min="1" max="5">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary col col-12 px-1 mb-3">Add Outcome and Go Home</button>
+        <button type="submit" name="saveAndAddAnother" value="true" class="btn btn-secondary col col-12 col-md-12 px-1">Save & Add Another Outcome</button>    
+    </form>
+</div>
+
+<script>
+    document.getElementById('outcome').addEventListener('input', function() {
+        const minLength = 100;
+        const outcomeTextarea = document.getElementById('outcome');
+        const length = outcomeTextarea.value.length;
+        const smallTag = document.querySelector('.text-muted');
+
+        if (length < minLength) {
+            outcomeTextarea.setCustomValidity('Minimum ' + minLength + ' characters required');
+            smallTag.innerHTML = 'Minimum 100 characters';
+            smallTag.classList.remove('text-success');
+            smallTag.classList.remove('bi-check-circle');
+        } else {
+            outcomeTextarea.setCustomValidity('');
+            smallTag.innerHTML = ' Good to go <i class="bi bi-check-circle" style="color: darkgreen;></i>';
+            smallTag.classList.add('text-success');
+            smallTag.classList.add('bi-check-circle');
+        }
+    });
+</script>

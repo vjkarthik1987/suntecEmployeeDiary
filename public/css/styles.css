@@ -1,0 +1,70 @@
+/* Regular Objects */
+body {
+    background-color: #f1f2f6;
+    min-height: 80vh;
+}
+
+/* ------------------ Classes  --------------------*/
+.mainDiv {
+    padding: 10px 15px;
+}
+.loginLeft{
+    background-image: url('/img/moonshot.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+}
+
+.leftHero{
+    background-image: url('/img/hero2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+}
+
+.contentHolder {
+    background-color: #ffffff;
+    padding: 5px 5px;
+    box-shadow: #cfcfcf 2px 2px 2px;
+    margin-bottom: 10px;
+}
+
+.redFont {
+    color: red;
+}
+
+.footer{
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    display: flex;
+    color: white;
+    padding: 3px 0;
+}
+
+.white{
+    color: white;
+    text-shadow: 1px 1px #aaa;
+}
+
+/* ------------------- Bootstrap edits ------------------*/
+.btn {
+    border-radius: 0;
+}
+
+.btn-primary {
+    background-color: purple;
+    border: 0px
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+/* -----------------------IDs -------------------------*/
+#hero{
+    background-image: url('/img/hero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}

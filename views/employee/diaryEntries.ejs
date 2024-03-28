@@ -1,0 +1,28 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <div class="row ">
+        <h2 class="fs-4">My Diary Entries</h2>
+        <% for (diaryEntry of employee.diaryEntries) { %>
+            <div class="col col-12 col-md-4 col-lg-3 py-2">
+                <div class="contentHolder mb-0">
+                    <% const result = (diaryEntry.forWeek) ? diaryEntry.forWeek : 'Not defined' %>
+                    <p class="text-primary mb-0"><%= result %></p>
+                    <p class="mb-1"><b>This Week: </b><%= diaryEntry.thisWeek %></p>
+                    <p class="mb-1"><b>Learning: </b><%= diaryEntry.learnings %></p>
+                    <p class="mb-1"><b>Plan for next week:</b><%= diaryEntry.nextWeek %></p>
+                </div>
+            </div>
+        <% } %>
+
+        <h2 class="fs-4">My Notes</h2>
+        <% for (note of employeeNotes.notes) { %>
+            <div class="col col-12 col-md-4 col-lg-3 py-2">
+                <div class="contentHolder mb-0 pe-2">
+                    <%const formattedDate = `${note.date.getFullYear()}-${(note.date.getMonth() + 1).toString().padStart(2, '0')}-${note.date.getDate().toString().padStart(2, '0')}`; %>
+                    <p class="text-primary mb-0"><%= formattedDate %></p>
+                    <p class="mb-1"><%= note.note %></p>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>

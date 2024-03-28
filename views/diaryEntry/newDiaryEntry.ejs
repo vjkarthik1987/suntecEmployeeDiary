@@ -1,0 +1,37 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form action="/diaryEntry" method="post" class="d-flex flex-column col col-12 col-md-5 mx-auto contentHolder px-2 mt-3">
+        <h1 class="fs-4">Add New Diary Entry</h1>
+        <div class="form-group mb-3">
+            <label for="forWeek" class="form-label">Select Week</label>
+            <select name="forWeek" id="forWeek" class="form-select">
+                <% for (allowedWeekString of allowedWeekStrings) { %>
+                    <% if (existingDiaryEntries.includes(allowedWeekString.dateString)) { %>
+                        <option value="<%= allowedWeekString.dateString %>" disabled><%= allowedWeekString.dateString %></option>
+                    <% } else { %>
+                        <option value="<%= allowedWeekString.dateString %>"><%= allowedWeekString.dateString %></option>
+                    <% } %>
+                <% } %>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="thisWeek" class="form-label">A brief note on this week</label>
+            <textarea name="thisWeek" id="thisWeek" cols="20" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3 col col-12 col-md-6">
+                <label for="learnings" class="form-label">Learnings</label>
+                <textarea name="learnings" id="learnings" cols="20" rows="3" class="form-control"></textarea>
+            </div>
+            <div class="form-group mb-3 col col-12 col-md-6">
+                <label for="nextWeek" class="form-label">Plans for next week</label>
+                <textarea name="nextWeek" id="nextWeek" cols="20" rows="3" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <button class="btn btn-primary mb-3">Save Diary & Add Outcomes</button>
+            <button class="btn btn-secondary mb-3" name = "noOutcome" value="true">Save Diary & Go Home</button>
+        </div>
+    </form>
+</div>
+

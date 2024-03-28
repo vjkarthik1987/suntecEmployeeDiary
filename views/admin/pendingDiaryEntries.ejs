@@ -1,0 +1,7 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv d-flex flex-column container">
+    <h1 class="fs-4">Select Starting Date of Week</h1>
+    <% for (allowedWeekString of allowedWeekStrings) { %>
+        <a href="/admin/pendingDiaryEntries/list/<%= allowedWeekString.dateString %>"><%= allowedWeekString.dateString %></a>
+    <% } %>
+</div>

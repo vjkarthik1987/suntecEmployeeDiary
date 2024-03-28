@@ -1,0 +1,43 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <h1 class="fs-2">Employee Details</h1>
+    <h2 class="fs-4"><%= employee[0].name %></h2>
+    <div class="contentHolder mt-2">
+        <p class="mb-1"><%= employee[0].email %></p>
+        <p class="mb-1">Username: <%= employee[0].username %></p>
+        <p class="mb-1">Manager Email: <%= employee[0].managerEmail %></p>
+        <p class="mb-1">Team: <%= employee[0].team %></p>
+        <p class="mb-1">Outcomes This FY: <%= employee[0].outcomes.length %></p>
+        <p class="mb-1">Diary Entries This FY: <%= employee[0].diaryEntries.length %></p>
+    </div>
+    <div>
+        <a href="#outcomes"><button class="btn btn-primary">See Outcomes</button></a>
+        <a href="/manager/employee/<%= employee[0]._id %>/diary"><button class="btn btn-primary">See Diary</button></a>
+    </div>
+    
+    <hr>
+
+    <div id="outcomes">
+        <h3>Outcomes</h3>
+        <div>
+            <div class="row  mx-0">
+                <p class="col col-12 col-md-4"><b>Outcome</b></p>
+                <p class="col col-12 col-md-2 text-center"><b>Self Rating</b></p>
+                <p class="col col-12 col-md-4"><b>Manager Feedback</b></p>
+                <p class="col col-12 col-md-2 text-center"><b>Manager Rating</b></p>
+            </div>
+            <% for (outcome of employee[0].outcomes) { %>
+                <div class="row contentHolder mx-0">
+                    <p class="col col-12 col-md-4"><%= outcome.outcome %></p>
+                    <p class="col col-12 col-md-2 text-center"><%= outcome.selfRating %></p>
+                    <p class="col col-12 col-md-4"><%= outcome.managerFeedback %></p>
+                    <p class="col col-12 col-md-2 text-center"><%= outcome.managerRating %></p>
+                    <% if(!outcome.managerRating) { %>
+                        <a href="/manager/employee/<%=employee[0]._id %>/outcome/<%= outcome._id %>/giveFeedback">Rate outcome</a>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+

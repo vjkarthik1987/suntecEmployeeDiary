@@ -1,0 +1,74 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <h1 class="fs-3">User details</h1>
+    <!-- Add the button to trigger data extraction -->
+    <a href="/admin/home"><button class="btn btn-primary mb-3">Admin Home</button></a>
+    <br>
+    <button id="extractDataButton" class="btn btn-primary mb-3">Extract Data</button>
+
+    <div class="contentHolder row mx-0 d-none d-md-flex" style="background-color: lightpink !important;">
+        <div class="col col-md-2 text-center">
+            <b>Name</b>
+        </div>
+        <div class="col col-md-2 text-center">
+            <b>Team</b>
+        </div>
+        <div class="col col-md-2 text-center">
+            <b>Function</b>
+        </div>
+        <div class="col col-md-2 text-center">
+            <b>Manager Name</b>
+        </div>
+        <div class="col col-md-2 text-center">
+            <b>Self Rating</b>
+        </div>
+        <div class="col col-md-2 text-center">
+            <b>Manager Rating</b>
+        </div>
+    </div>
+    <% for (employee of employees) { %>
+        <div class="mx-0 d-md-flex">
+            <div class="col col-4 col-md-2 ps-md-2">
+                <p><b><%= employee.name %></b></p>
+            </div>
+            <div class="col col-6 col-md-2 text-md-center">
+                <p><%= employee.team %></p>
+            </div>
+            <div class="col col-6 col-md-2 text-md-center">
+                <p><%= employee.function %></p>
+            </div>
+            <div class="col col-6 col-md-2 text-md-center">
+                <p><%= employee.managerName %></p>
+            </div>
+            <div class="col col-6 col-md-2 text-md-center">
+                <p><%= employee.averageSelfRating %></p>
+            </div>
+            <div class="col col-6 col-md-2 text-md-center">
+                <p><%= employee.averageManagerRating %></p>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    document.getElementById('extractDataButton').addEventListener('click', function() {
+        // Create a CSV header
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "Name,Team,Function,Manager,Self Rating,Manager Rating\n";
+
+        // Iterate over each employee and add their data to the CSV content
+        <% for (employee of employees) { %>
+            csvContent += "<%= employee.name %>,<%= employee.team %>,<%= employee.function %>,<%= employee.managerEmail %>,<%= employee.averageSelfRating %>,<%= employee.averageManagerRating %>\n";
+        <% } %>
+
+        // Create a blob with the CSV content
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "user_details.csv");
+        document.body.appendChild(link);
+
+        // Trigger a click event on the link to initiate the download
+        link.click();
+    });
+</script>

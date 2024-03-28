@@ -1,0 +1,64 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form action="/admin/employee" method="post" class="d-flex  flex-column col col-12 col-md-5 mx-auto contentHolder px-2 mt-3">
+        <h1 class="fs-4 d-block mt-2">Add Employee</h1>
+        <div class="form-group mb-3">
+            <label for="empID" class="form-label">Employee ID</label>
+            <input required type="text" class="form-control" id="empID" name="empID">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input required type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email" class="form-label mb-0">Email</label>
+            <input required type="email" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="managerEmail" class="form-label">Manager Email</label>
+            <input required type="email" class="form-control" id="managerEmail" name="managerEmail">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="team" class="form-label">Team</label>
+            <input required type="text" class="form-control" id="team" name="team">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="function" class="form-label">Function</label>
+            <input required type="text" class="form-control" id="function" name="function">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="role" class="form-label">Role</label>
+            <input required type="text" class="form-control" id="role" name="role">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="isAdmin" class="form-label">Admin</label>
+            <select name="isAdmin" id="isAdmin" class="form-control">
+                <option value="true">Yes</option>
+                <option value="false" selected>No</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary col col-12 px-1 mb-3 mt-3">Create User</button>   
+    </form>
+    <!-- 
+    role: String,
+    diaryEntries: [{
+        type: Schema.Types.ObjectId,
+        ref:'DiaryEntry',
+    }],
+    outcomes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Outcome',
+    }],
+    notes:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Note',
+    }],
+    isAdmin: Boolean,   -->
+</div>

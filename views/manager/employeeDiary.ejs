@@ -1,0 +1,17 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <h1 class="fs-4">Diary Entries</h1>
+    <div class="row mx-0">
+        <% for (diaryEntry of employee.diaryEntries) { %>
+            <div class="col col-12 col-md-3 pe-2 ps-0 py-2">
+                <div class="contentHolder">
+                    <% const result = (diaryEntry.forWeek) ? diaryEntry.forWeek : 'Not defined' %>
+                    <p class="text-primary mb-0"><%= result %></p>
+                    <p class="mb-1"><b>This Week: </b><%= diaryEntry.thisWeek %></p>
+                    <p class="mb-1"><b>Learning: </b><%= diaryEntry.learnings %></p>
+                    <p class="mb-1"><b>Plan for next week:</b><%= diaryEntry.nextWeek %></p>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>

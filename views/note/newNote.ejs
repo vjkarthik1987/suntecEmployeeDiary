@@ -1,0 +1,18 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <form action="/note" method="post" class="d-flex flex-column col col-12 col-md-5 mx-auto contentHolder px-2 mt-3">
+        <h1 class="fs-4">Add New Note</h1>
+        <div class="form-group mb-3">
+            <label for="date" class="form-label">Select Date for Note</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <div class="form-group mb-3">
+            <label for="note" class="form-label">Write note</label>
+            <textarea name="note" id="note" cols="20" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="row mx-0">
+            <button class="btn btn-primary mb-3">Save Note</button>
+        </div>
+    </form>
+</div>
+

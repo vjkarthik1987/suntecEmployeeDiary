@@ -1,0 +1,69 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <!-- Snapshot -->
+    <div>
+        <h2 class="fs-3">Welcome <%= user.name %></h2>
+        <% const today = new Date(); %>
+        <% const formattedDate = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear().toString()}`; %>
+        <h4 class="fs-6">Today is: <%= formattedDate %></h4>
+    </div>
+    <div>
+        <a href="/diaryEntry/new" class="btn btn-primary mb-3">Add new diary entry</a>
+        <a href="/outcome/new" class="btn btn-primary mb-3">Add outcome</a>
+        <a href="/note/new" class="btn btn-primary mb-3">Add note</a>
+        <a href="" class="btn btn-primary mb-3">Assign Outcome</a>
+    </div>
+    <div class="contentHolder d-inline-block pe-4 mb-3">
+        <h3 class="fs-4">Quick snapshot</h3>
+        <p class="mb-1">Outcomes completed this FY: <%= outcomeCount %></p>
+        <p class="mb-1">Average self-rating (FY): <%= averageSelfRating %></p>
+        <p class="mb-1">Average manager-rating (FY): <%= averageManagerRating %></p>
+    </div>
+
+    <div>
+        <h3 class="fs-4 mb-3">Quick view</h3>
+        <div class="row mx-0">
+            <div class="col col-12 col-md-4 px-0 pe-md-3">
+                <h4 class="fs-5 d-inline-block">Last 6 diary entries</h4>
+                <p class="d-inline"><a href="/employee/diaryEntries">See All</a></p>
+                <div>
+                    <% for (diaryEntry of diaryEntries) { %>
+                        <div class="contentHolder">
+                            <p class="mb-1 mt-2 text-primary"><i><%= diaryEntry.forWeek %></i></p>
+                            <p class="mb-1"><b>This Week</b>: </b><%= diaryEntry.thisWeek %></p>
+                            <p class="mb-1"><b>My Learning: </b><%= diaryEntry.learnings %></p>
+                            <p><b>Plan for Next Week: </b><%= diaryEntry.nextWeek %></p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="col col-12 col-md-4 px-0 pe-md-3">
+                <h4 class="fs-5 d-inline-block">Recent 6 outcomes</h4>
+                <p class="d-inline"><a href="">See All</a></p>
+                <div>
+                    <% for (outcome of outcomes) { %>
+                        <div class="contentHolder">
+                            <p class="mb-0 mt-2"><b>Outcome</b></p>
+                            <p class="mb-1"><%= outcome.outcomeHeading %></p>
+                            <p class="mb-0 mt-2"><b>Details</b></p>
+                            <p class="mb-1"><%= outcome.outcome %></p>
+                            <p class="mb-0"><b>Manager Feedback</b></p>
+                            <p class="mb-1"><%= outcome.managerFeedback %></p>
+                            <hr>
+                            <p class="d-inline">Self Rating: <b><%= outcome.selfRating %></b></p>
+                            <p class="d-inline">Manager Rating: <b><%= outcome.managerRating %></b></p>  
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="col col-12 col-md-4 px-0">
+                <h4 class="fs-5 d-inline-block">Pending assigned outcomes</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

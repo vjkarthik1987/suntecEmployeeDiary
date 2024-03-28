@@ -1,0 +1,18 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <h1 class="fs-3">My team (<%= employeeData.length %>)</h1>
+    <div class="px-2">
+            <% employeeData.forEach(employeeObj => { %>
+                <div class="row contentHolder align-items-center pt-3">
+                    <% const result = (employeeObj.pendingManagerRatingOutcomes) ? true : false %>
+                    <a href="/manager/employee/<%= employeeObj.employee._id %>" class="col col-12 col-md-2"><p><%= employeeObj.employee.name %></p></a>
+                    <p class="col col-6 col-md-2">Outcomes: <%= employeeObj.totalOutcomes %></p>
+                    <!-- <p class="col col-6 col-md-2 <% (result) ?'redFont' :'' %>">Pending Rating: <%= employeeObj.pendingManagerRatingOutcomes %></p> -->
+                    <p class="col col-6 col-md-2 <%= result ? 'redFont' : '' %>">Pending Rating: <%= employeeObj.pendingManagerRatingOutcomes %></p>
+                    <p class="col col-6 col-md-2">Diary Entries: <%= employeeObj.totalDiaryEntries %></p>
+                    <p class="col col-6 col-md-2">Avg Self Rating: <%= employeeObj.averageSelfRating %></p>
+                    <p class="col col-6 col-md-2">Avg Mgr. Rating: <%= employeeObj.averageManagerRating %></p>
+                </div>
+            <% }) %>
+    </div>
+</div>

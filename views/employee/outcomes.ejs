@@ -1,0 +1,31 @@
+<% layout('./layout/boilerplate') -%>
+<div class="mainDiv container">
+    <div class="mb-2 d-xs-block d-md-none">
+        <a href="#outcomes"><button class="btn btn-primary">Outcomes</button></a>
+        <a href="#assignedOutcomes"><button class="btn btn-primary">Assigned Outcomes</button></a>
+    </div>
+    <div class="row">
+        <div class="col col-12 col-md-6 pe-2" id="outcomes">
+            <h1 class="fs-4">My Outcomes</h1>
+            <% for (outcome of employee.outcomes) { %>
+                <div class="col col-12 py-2">
+                    <div class="contentHolder row">
+                        <p class="mb-0 col col-12"><b>Outcome</b></p>
+                        <p class="mb-2 col col-12"><%= outcome.outcomeHeading %></p>
+                        <p class="mb-0 col col-12"><b>Details </b></p>
+                        <p class="mb-2 col col-12"> <%= outcome.outcome %></p>
+                        <p class="mb-1 col col-2"><b>Effort: </b><%= outcome.effort %></p>
+                        <p class="mb-1 col col-4"><b>Plan End: </b> <%= new Date(outcome.planEndDate).toLocaleDateString('en-GB') %></p>
+                        <p class="mb-1 col col-4"><b>Actual End: </b> <%= new Date(outcome.actualEndDate).toLocaleDateString('en-GB') %></p>
+                        <p class="mb-1 col col-6"><b>Self Rating: </b><%= outcome.selfRating %></p>
+                        <p class="mb-1 col col-6"><b>Manager Rating: </b><%= outcome.managerRating %></p>
+                        <p class="mb-1 col col-12"><b>Manager Feedback: </b><%= outcome.managerFeedback %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        <div class="col col-12 col-md-6 pe-2" id="assignedOutcomes">
+            <h1 class="fs-4">Pending Assigned Outcomes</h1>
+        </div>
+    </div>
+</div>
